@@ -1,6 +1,6 @@
 fun main() {
 
-    val transferToKopecks = 100
+    val transferToKopecks = 1_00
     println("Комиссия по переводу: "+getCommission(100000 * transferToKopecks)+" коп.")
     println("Комиссия по переводу: "+getCommission(200000 * transferToKopecks, 2000000 * transferToKopecks)+" коп.")
     println("Комиссия по переводу: "+getCommission(100000 * transferToKopecks, cardType = CardType.Mastercard)+" коп.")
@@ -20,14 +20,14 @@ private fun getCommission(currentAmount: Int, previousAmount: Int = 0, cardType:
     when (cardType) {
         CardType.Mastercard, CardType.Maestro -> {
             val commissionMultiplier = 0.006
-            val additionalCommission = 2_000
-            val commissionAmountLimit = 7_500_000
+            val additionalCommission = 20_00
+            val commissionAmountLimit = 75_000_00
             val wholeMonthAmount = currentAmount + previousAmount
             if (wholeMonthAmount < commissionAmountLimit) 0 else (currentAmount * commissionMultiplier).toInt() + additionalCommission
         }
         CardType.Visa, CardType.Mir -> {
             val commissionMultiplier = 0.0075
-            val minCommissionAmount = 3_500
+            val minCommissionAmount = 35_00
             val commissionFromAmount = (currentAmount * commissionMultiplier).toInt()
             if (commissionFromAmount >= minCommissionAmount) commissionFromAmount else minCommissionAmount
         }
